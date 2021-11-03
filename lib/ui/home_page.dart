@@ -2,6 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sms/database/local_db_helper.dart';
+import 'package:sms/models/poem.dart';
+import 'dart:async';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,6 +14,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late Future<List<Poem>> _poemList;
+
+  _updatePoemList() {
+    setState(() {
+      _poemList = LocalDbHelper.instance.getPoemList();
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _updatePoemList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                                           color: Color(0xffB99303),
                                           fontSize: 18,
                                           fontFamily:
-                                              'assets/fonts/SFProDisplay.ttf'),
+                                          'assets/fonts/SFProDisplay.ttf'),
                                     )
                                   ],
                                 ),
@@ -98,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25,
                                           fontFamily:
-                                              'assets/fonts/SFProDisplay.ttf'),
+                                          'assets/fonts/SFProDisplay.ttf'),
                                     ),
                                     SizedBox(
                                       width: 5,
@@ -110,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25,
                                           fontFamily:
-                                              'assets/fonts/SFProDisplay.ttf'),
+                                          'assets/fonts/SFProDisplay.ttf'),
                                     )
                                   ],
                                 )
