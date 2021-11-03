@@ -181,13 +181,13 @@ class _$PoemDao extends PoemDao {
   @override
   Future<int?> getCountNew() async {
     await _queryAdapter
-        .queryNoReturn('select count(is_new) from Poem where is_new=1');
+        .queryNoReturn('select count(isNew) from Poem where isNew=1');
   }
 
   @override
   Future<int?> getCountLike() async {
     await _queryAdapter
-        .queryNoReturn('select count(is_liked) from Poem where is_liked=1');
+        .queryNoReturn('select count(isLiked) from Poem where isLiked=1');
   }
 
   @override

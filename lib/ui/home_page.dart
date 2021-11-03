@@ -98,20 +98,42 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Text(
-                                      '122',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25,
-                                          fontFamily:
-                                              'assets/fonts/SFProDisplay.ttf'),
+                                  children: [
+                                    FutureBuilder(
+                                      future: widget.dao!.getCountNew(),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.hasError) {
+                                          return Center(
+                                            child: Text("${snapshot.error}"),
+                                          );
+                                        } else if (snapshot.hasData) {
+                                          var count = snapshot.data as int;
+                                          return Text(
+                                            '$count',
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 25,
+                                                fontFamily:
+                                                    'assets/fonts/SFProDisplay.ttf'),
+                                          );
+                                        } else {
+                                          return const Text(
+                                            '0',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 25,
+                                                fontFamily:
+                                                    'assets/fonts/SFProDisplay.ttf'),
+                                          );
+                                        }
+                                      },
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 5,
                                     ),
-                                    Text(
+                                    const Text(
                                       'ta',
                                       style: TextStyle(
                                           color: Color(0xffB99303),
@@ -184,20 +206,42 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Text(
-                                      '5',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25,
-                                          fontFamily:
-                                              'assets/fonts/SFProDisplay.ttf'),
+                                  children: [
+                                    FutureBuilder(
+                                      future: widget.dao!.getCountLike(),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.hasError) {
+                                          return Center(
+                                            child: Text("${snapshot.error}"),
+                                          );
+                                        } else if (snapshot.hasData) {
+                                          var count = snapshot.data as int;
+                                          return Text(
+                                            '$count',
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 25,
+                                                fontFamily:
+                                                    'assets/fonts/SFProDisplay.ttf'),
+                                          );
+                                        } else {
+                                          return const Text(
+                                            '0',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 25,
+                                                fontFamily:
+                                                    'assets/fonts/SFProDisplay.ttf'),
+                                          );
+                                        }
+                                      },
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 5,
                                     ),
-                                    Text(
+                                    const Text(
                                       'ta',
                                       style: TextStyle(
                                           color: Color(0xffFFA6B6),

@@ -22,10 +22,10 @@ abstract class PoemDao {
   @Query('select * from Poem where id=:id')
   Stream<Poem?> getPoemById(int id);
 
-  @Query('select count(is_new) from Poem where is_new=1')
+  @Query('select count(isNew) from Poem where isNew=1')
   Future<int?> getCountNew();
 
-  @Query('select count(is_liked) from Poem where is_liked=1')
+  @Query('select count(isLiked) from Poem where isLiked=1')
   Future<int?> getCountLike();
 
   @Query('delete from Poem')

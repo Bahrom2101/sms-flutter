@@ -4,7 +4,7 @@ import 'package:floor/floor.dart';
 class Poem {
   @PrimaryKey(autoGenerate: true)
   final int? id;
-  String? title, body, category;
+  final String? title, body, category;
   int? isNew, isLiked;
 
   Poem(
