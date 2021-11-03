@@ -2,35 +2,26 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sms/database/local_db_helper.dart';
-import 'package:sms/models/poem.dart';
+import 'package:sms/dao/poem_dao.dart';
+import 'package:sms/entity/poem.dart';
 import 'dart:async';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final PoemDao? dao;
+
+  const HomePage({Key? key, required this.dao}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<List<Poem>> _poemList;
-
-  _updatePoemList() {
-    setState(() {
-      _poemList = LocalDbHelper.instance.getPoemList();
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _updatePoemList();
-  }
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       backgroundColor: const Color(0xffE5E5E5),
       body: SafeArea(
         child: Padding(
@@ -98,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                                           color: Color(0xffB99303),
                                           fontSize: 18,
                                           fontFamily:
-                                          'assets/fonts/SFProDisplay.ttf'),
+                                              'assets/fonts/SFProDisplay.ttf'),
                                     )
                                   ],
                                 ),
@@ -115,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25,
                                           fontFamily:
-                                          'assets/fonts/SFProDisplay.ttf'),
+                                              'assets/fonts/SFProDisplay.ttf'),
                                     ),
                                     SizedBox(
                                       width: 5,
@@ -127,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25,
                                           fontFamily:
-                                          'assets/fonts/SFProDisplay.ttf'),
+                                              'assets/fonts/SFProDisplay.ttf'),
                                     )
                                   ],
                                 )
@@ -184,7 +175,7 @@ class _HomePageState extends State<HomePage> {
                                           color: Color(0xffFFA6B6),
                                           fontSize: 18,
                                           fontFamily:
-                                          'assets/fonts/SFProDisplay.ttf'),
+                                              'assets/fonts/SFProDisplay.ttf'),
                                     )
                                   ],
                                 ),
@@ -201,7 +192,7 @@ class _HomePageState extends State<HomePage> {
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25,
                                           fontFamily:
-                                          'assets/fonts/SFProDisplay.ttf'),
+                                              'assets/fonts/SFProDisplay.ttf'),
                                     ),
                                     SizedBox(
                                       width: 5,
@@ -213,7 +204,7 @@ class _HomePageState extends State<HomePage> {
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25,
                                           fontFamily:
-                                          'assets/fonts/SFProDisplay.ttf'),
+                                              'assets/fonts/SFProDisplay.ttf'),
                                     )
                                   ],
                                 )
