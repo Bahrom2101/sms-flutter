@@ -164,6 +164,21 @@ class _$PoemDao extends PoemDao {
   }
 
   @override
+  Stream<List<Poem>> getAllPoemByCategory(String s) {
+    return _queryAdapter.queryListStream('select * from Poem where category=?1',
+        mapper: (Map<String, Object?> row) => Poem(
+            id: row['id'] as int?,
+            title: row['title'] as String?,
+            body: row['body'] as String?,
+            category: row['category'] as String?,
+            isNew: row['isNew'] as int?,
+            isLiked: row['isLiked'] as int?),
+        arguments: [s],
+        queryableName: 'Poem',
+        isView: false);
+  }
+
+  @override
   Future<List<Poem>> getAllPoemNew() async {
     return _queryAdapter.queryList('select * from Poem where isNew=1',
         mapper: (Map<String, Object?> row) => Poem(

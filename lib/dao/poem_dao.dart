@@ -7,6 +7,9 @@ abstract class PoemDao {
   @Query('select * from Poem')
   Stream<List<Poem>> getAllPoem();
 
+  @Query('select * from Poem where category=:s')
+  Stream<List<Poem>> getAllPoemByCategory(String s);
+
   @Query('select * from Poem where isNew=1')
   Future<List<Poem>> getAllPoemNew();
 
