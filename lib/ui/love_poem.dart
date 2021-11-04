@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sms/dao/poem_dao.dart';
 import 'package:sms/entity/poem.dart';
@@ -16,6 +17,165 @@ class LovePoemPage extends StatefulWidget {
 
 class _LovePoemPageState extends State<LovePoemPage> {
   String title = '';
+
+  void _showBottomSheet(BuildContext context, Poem poem) {
+    showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.transparent,
+        builder: (context) {
+          return SafeArea(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Column(
+                  children: [
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      color: const Color(0xffffffff),
+                      elevation: 2.0,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 13.0, right: 10.0, top: 8.0, bottom: 8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              poem.title!,
+                              style: const TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              poem.body!,
+                              style: const TextStyle(
+                                fontSize: 15,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                        color: Colors.white,
+                        // border: Border.all(color: Colors.blueAccent,),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 15.0, right: 15.0, top: 5.0, bottom: 5.0),
+                        child: SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: FittedBox(
+                              fit: BoxFit.fill,
+                              child: SvgPicture.asset(
+                                'assets/svg/ic_message.svg',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                        color: Colors.white,
+                        // border: Border.all(color: Colors.blueAccent,),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 15.0, right: 15.0, top: 5.0, bottom: 5.0),
+                        child: SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: FittedBox(
+                              fit: BoxFit.fill,
+                              child: SvgPicture.asset(
+                                'assets/svg/ic_like.svg',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                        color: Colors.white,
+                        // border: Border.all(color: Colors.blueAccent,),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 15.0, right: 15.0, top: 5.0, bottom: 5.0),
+                        child: SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: FittedBox(
+                              fit: BoxFit.fill,
+                              child: SvgPicture.asset(
+                                'assets/svg/ic_share.svg',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                        color: Colors.white,
+                        // border: Border.all(color: Colors.blueAccent,),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 15.0, right: 15.0, top: 5.0, bottom: 5.0),
+                        child: SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: FittedBox(
+                              fit: BoxFit.fill,
+                              child: SvgPicture.asset(
+                                'assets/svg/ic_copy.svg',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+              ],
+            ),
+          );
+        },
+        isScrollControlled: true
+    );
+  }
 
   @override
   void initState() {
@@ -121,7 +281,7 @@ class _LovePoemPageState extends State<LovePoemPage> {
                           itemBuilder: (context, index) {
                             return GestureDetector(
                               onTap: () {
-
+                                _showBottomSheet(context, list[index]);
                               },
                               child: Padding(
                                 padding: const EdgeInsets.only(
