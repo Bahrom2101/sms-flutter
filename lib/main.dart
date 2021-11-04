@@ -10,13 +10,17 @@ Future<void> main() async {
   runApp(MyApp(dao:dao));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
 
   final PoemDao? dao;
 
-  MyApp({Key? key,required this.dao}) : super(key: key);
+  const MyApp({Key? key,required this.dao}) : super(key: key);
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,7 +29,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(dao:dao),
+      home: HomePage(dao:widget.dao),
     );
   }
 }

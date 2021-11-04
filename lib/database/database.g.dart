@@ -151,7 +151,7 @@ class _$PoemDao extends PoemDao {
 
   @override
   Stream<List<Poem>> getAllPoem() {
-    return _queryAdapter.queryListStream('select * from Employee',
+    return _queryAdapter.queryListStream('select * from Poem',
         mapper: (Map<String, Object?> row) => Poem(
             id: row['id'] as int?,
             title: row['title'] as String?,
@@ -161,6 +161,30 @@ class _$PoemDao extends PoemDao {
             isLiked: row['isLiked'] as int?),
         queryableName: 'Poem',
         isView: false);
+  }
+
+  @override
+  Future<List<Poem>> getAllPoemNew() async {
+    return _queryAdapter.queryList('select * from Poem where isNew=1',
+        mapper: (Map<String, Object?> row) => Poem(
+            id: row['id'] as int?,
+            title: row['title'] as String?,
+            body: row['body'] as String?,
+            category: row['category'] as String?,
+            isNew: row['isNew'] as int?,
+            isLiked: row['isLiked'] as int?));
+  }
+
+  @override
+  Future<List<Poem>> getAllPoemLiked() async {
+    return _queryAdapter.queryList('select * from Poem where isLiked=1',
+        mapper: (Map<String, Object?> row) => Poem(
+            id: row['id'] as int?,
+            title: row['title'] as String?,
+            body: row['body'] as String?,
+            category: row['category'] as String?,
+            isNew: row['isNew'] as int?,
+            isLiked: row['isLiked'] as int?));
   }
 
   @override
@@ -176,18 +200,6 @@ class _$PoemDao extends PoemDao {
         arguments: [id],
         queryableName: 'Poem',
         isView: false);
-  }
-
-  @override
-  Future<int?> getCountNew() async {
-    await _queryAdapter
-        .queryNoReturn('select count(isNew) from Poem where isNew=1');
-  }
-
-  @override
-  Future<int?> getCountLike() async {
-    await _queryAdapter
-        .queryNoReturn('select count(isLiked) from Poem where isLiked=1');
   }
 
   @override
